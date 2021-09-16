@@ -58,7 +58,6 @@
             function generateQRCode() {
                 var qrtext = (document.getElementById("first").value.trim()+" ")+(document.getElementById("last").value.trim()+" ")+document.getElementById("form").value.trim();
                 document.getElementById("qr-result").innerHTML = "QR code for " + qrtext +":";
-                alert(qrtext);
                 qr.set({
                     foreground: 'black',
                     size: 200,
