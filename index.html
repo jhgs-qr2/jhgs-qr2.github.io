@@ -1,7 +1,195 @@
 <!DOCTYPE html>
+
 <html>
+  <head></head>
+  <body>
+    <!--
+    BEFORE RUNNING:
+    ---------------
+    1. If not already done, enable the Google Sheets API
+       and check the quota for your project at
+       https://console.developers.google.com/apis/api/sheets
+    2. Get access keys for your application. See
+       https://developers.google.com/api-client-library/javascript/start/start-js#get-access-keys-for-your-application
+    3. For additional information on authentication, see
+       https://developers.google.com/sheets/api/quickstart/js#step_2_set_up_the_sample
+    -->
+    <script>
+	
+
+    function makeApiCall(qr, club) {
+      var params = {
+        // The ID of the spreadsheet to update.
+        spreadsheetId: '1Uq2D2PondF-NZwkNnW-OXJWUUZjtz3F6iE7a8XDUvDk',  // TODO: Update placeholder value.
+
+        // The A1 notation of a range to search for a logical table of data.
+        // Values will be appended after the last row of the table.
+        range: '!A1:C1'  // TODO: Update placeholder value.
+
+        // How the input data should be interpreted.
+        valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
+
+        // How the input data should be inserted.
+        insertDataOption: 'INSERT_ROWS',  // TODO: Update placeholder value.
+      };
+ var d = new Date();
+var n = d.toLocaleString();
+      var valueRangeBody = {
+
+  "range": "ClubData!A1:B1",
+  "majorDimension": "ROWS",
+  "values": [
+    [qr,n]
+]
+      };
+
+      var request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
+      request.then(function(response) {
+	console.log(response.result);
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message);
+      });
+    }
+
+    function initClient() {
+      var API_KEY = 'AIzaSyAm02zc16ma4fmsHi-a34Kcze0C9rc19wk';  // TODO: Update placeholder with desired API key.
+
+      var CLIENT_ID = '36530272431-up5uj8q5psvs60fafqaah8cbhdoj99dm.apps.googleusercontent.com';  // TODO: Update placeholder with desired client ID.
+
+      // TODO: Authorize using one of the following scopes:
+      //   'https://www.googleapis.com/auth/drive'
+      //   'https://www.googleapis.com/auth/drive.file'
+      //   'https://www.googleapis.com/auth/spreadsheets'
+      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+
+      gapi.client.init({
+        'apiKey': API_KEY,
+        'clientId': CLIENT_ID,
+        'scope': SCOPE,
+        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+      }).then(function() {
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+      });
+    }
+
+    function handleClientLoad() {
+      gapi.load('client:auth2', initClient);
+    }
+
+    function updateSignInStatus(isSignedIn) {
+      if (isSignedIn) {
+	alert("Signed in Successfully")
+      }
+    }
+
+    function handleSignInClick(event) {
+      gapi.auth2.getAuthInstance().signIn();
+    }
+
+    function handleSignOutClick(event) {
+      gapi.auth2.getAuthInstance().signOut();
+    }
+    function addData(event) {
+	var club = "Debating";
+	var qr = document.getElementById("myText").innerHTML;
+	makeApiCall(qr, club);
+}
+    </script>
+<script>
+function docReady(fn) {
+    // see if DOM is already available
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        // call on next available tick
+        setTimeout(fn, 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+} 
+
+docReady(function() {
+    var resultContainer = document.getElementById('qr-reader-results');
+    var lastResult, countResults = 0;
+    
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-reader", { fps: 10, qrbox: 250 });
+    
+    function onScanSuccess(qrCodeMessage) {
+        if (qrCodeMessage !== lastResult) {
+            ++countResults;
+            lastResult = qrCodeMessage;
+            resultContainer.innerHTML += `<div>[${countResults}] - ${qrCodeMessage}</div>`;
+            
+            // Optional: To close the QR code scannign after the result is found
+            html5QrcodeScanner.clear();
+        }
+    }
+    
+    // Optional callback for error, can be ignored.
+    function onScanError(qrCodeError) {
+        // This callback would be called in case of qr code scan error or setup error.
+        // You can avoid this callback completely, as it can be very verbose in nature.
+    }
+    
+    html5QrcodeScanner.render(onScanSuccess, onScanError);
+});
+</script>
+<style>
+#preview{
+   width:500px;
+   height: 500px;
+   margin:0px auto;
+}
+</style>
+<video id="preview"></video>
+<style>
+#preview{
+   width:500px;
+   height: 500px;
+   margin:0px auto;
+}
+</style>
+<video id="preview"></video>
+<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+<script type="text/javascript">
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
+ var out = "";
+    var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
+    scanner.addListener('scan',function(content){
+        // content = the found qr code
+        out = content;
+        document.getElementById("myText").innerHTML = out;        
+    });
+    Instascan.Camera.getCameras().then(function (cameras){
+        if(cameras.length>0){
+            scanner.start(cameras[0]);
+                    if(cameras[0]!=""){
+                        scanner.start(cameras[0]);
+                    }else{
+                        alert('No Front camera found!');
+            };
+        }else{
+            console.error('No cameras found.');
+            alert('No cameras found.');
+        }
+    });
+</script>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<h1>Code found: <span id="myText"></span></h1>
 </body>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+    <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
+    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+    <button id="adddata-button" onclick="addData()">Add Data</button>
+  </body>
 </html>
