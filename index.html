@@ -3,17 +3,6 @@
 <html>
   <head></head>
   <body>
-    <!--
-    BEFORE RUNNING:
-    ---------------
-    1. If not already done, enable the Google Sheets API
-       and check the quota for your project at
-       https://console.developers.google.com/apis/api/sheets
-    2. Get access keys for your application. See
-       https://developers.google.com/api-client-library/javascript/start/start-js#get-access-keys-for-your-application
-    3. For additional information on authentication, see
-       https://developers.google.com/sheets/api/quickstart/js#step_2_set_up_the_sample
-    -->
     <script>
 	
 
@@ -24,7 +13,7 @@
 
         // The A1 notation of a range to search for a logical table of data.
         // Values will be appended after the last row of the table.
-        range: '!A1:C1'  // TODO: Update placeholder value.
+        range: club.concat('!A1:B1'),  // TODO: Update placeholder value.
 
         // How the input data should be interpreted.
         valueInputOption: 'USER_ENTERED',  // TODO: Update placeholder value.
@@ -36,7 +25,7 @@
 var n = d.toLocaleString();
       var valueRangeBody = {
 
-  "range": "ClubData!A1:B1",
+  "range": club+"!A1:B1",
   "majorDimension": "ROWS",
   "values": [
     [qr,n]
@@ -45,9 +34,8 @@ var n = d.toLocaleString();
 
       var request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
       request.then(function(response) {
-	console.log(response.result);
       }, function(reason) {
-        console.error('error: ' + reason.result.error.message);
+        alert('error: ' + reason.result.error.message);
       });
     }
 
@@ -89,11 +77,14 @@ var n = d.toLocaleString();
 
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
+      alert("Signed Out")
     }
     function addData(event) {
-	var club = "Debating";
+	var clubHTML = document.getElementById("clubPicked");
+	var club = clubHTML.value;
 	var qr = document.getElementById("myText").innerHTML;
 	makeApiCall(qr, club);
+	alert("Data logged")
 }
     </script>
 <script>
@@ -183,6 +174,7 @@ function sleep(milliseconds) {
 </script>
 <body>
 <h1>Code found: <span id="myText"></span></h1>
+
 </body>
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
@@ -191,5 +183,13 @@ function sleep(milliseconds) {
     <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
     <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
     <button id="adddata-button" onclick="addData()">Add Data</button>
+<label for="clubPick">Club:</label>
+
+<select name="clubPick" id="clubPicked">
+  <option value="Debating">Debating</option>
+  <option value="Mock Trial">Mock Trial</option>
+</select>
+
   </body>
 </html>
+
