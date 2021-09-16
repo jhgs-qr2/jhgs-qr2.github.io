@@ -3,7 +3,7 @@
 <html>
   <head></head>
   <body>
-	  <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
     <script>
 	
 
@@ -81,7 +81,6 @@ var signedin = False;
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
       alert("Signed Out")
-	    	document.getElementById("signedIn").innerHTML = "";
     }
     function addData(event) {
 	var clubHTML = document.getElementById("clubPicked");
@@ -145,6 +144,7 @@ docReady(function() {
 }
 </style>
 <video id="preview"></video>
+<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 <script type="text/javascript">
 function sleep(milliseconds) {
   const date = Date.now();
