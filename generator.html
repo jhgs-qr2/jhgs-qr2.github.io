@@ -1,0 +1,71 @@
+<!doctype html>
+	<head>
+		<style>
+			
+			body {
+			    padding:20px;
+			}
+			input {
+			    padding:5px;
+			    background-color:transparent;
+			    border:none;
+			    border-bottom:solid 4px #FFD700;
+			    width:250px;
+			    font-size:16px;
+			}
+			
+			.qr-btn {
+			    background-color:#FFD700;
+			    padding:8px;
+			    color:black;
+			    cursor:pointer;
+			}
+		</style>
+		
+		<title>JavaScript QR Code Generator</title>
+	</head>
+	<body>
+		<h3>JHGS Clubs QR Code Generator</h3>
+        <div><input id="first" type="text" placeholder="First Name"/></div>
+        <br/>
+        <div>
+					
+        <div><input id="last" type="text" placeholder="Second Name"/></div>
+        <br/>
+        <div>
+			
+        <div><input id="form" type="text" placeholder="Form"/></div>
+        <br/>
+        <div>
+            <button class="qr-btn" onclick="generateQRCode()">Create QR Code</button>
+        </div>
+        <br/>
+        <p id="qr-result">This is the default QR code:</p>
+        <canvas id="qr-code"></canvas>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+		<script>
+			
+			var qr;
+			(function() {
+                    qr = new QRious({
+                    element: document.getElementById('qr-code'),
+                    size: 200,
+                    
+                });
+            })();
+            
+            function generateQRCode() {
+                var qrtext = (document.getElementById("first").value.trim()+" ")+(document.getElementById("last").value.trim()+" ")+document.getElementById("form").value.trim();
+                document.getElementById("qr-result").innerHTML = "QR code for " + qrtext +":";
+                alert(qrtext);
+                qr.set({
+                    foreground: 'black',
+                    size: 200,
+                    value: qrtext
+                });
+            }
+		</script>
+        
+	</body>
+</html>
