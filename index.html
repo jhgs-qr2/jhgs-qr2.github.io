@@ -80,6 +80,7 @@ var signedin = False;
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
       alert("Signed Out")
+	    	document.getElementById("signedIn").innerHTML = "";
     }
     function addData(event) {
 	var clubHTML = document.getElementById("clubPicked");
