@@ -23,6 +23,7 @@
       };
  var d = new Date();
 var n = d.toLocaleString();
+var signedin = False; 
       var valueRangeBody = {
 
   "range": club+"!A1:B1",
@@ -68,6 +69,7 @@ var n = d.toLocaleString();
     function updateSignInStatus(isSignedIn) {
       if (isSignedIn) {
 	alert("Signed in Successfully")
+	document.getElementById("signedIn").innerHTML = "You are now signed in";
       }
     }
 
@@ -173,8 +175,8 @@ function sleep(milliseconds) {
     });
 </script>
 <body>
-<h1>Code found: <span id="myText"></span></h1>
-
+<h1>Code found: <span id="myText"></span> </h1>
+<h2><span id="signedIn"></span><h2>
 </body>
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
