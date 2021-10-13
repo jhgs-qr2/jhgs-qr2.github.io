@@ -89,7 +89,9 @@ var signedin = false;
 
     function updateSignInStatus(isSignedIn) {
       if (isSignedIn) {
-	document.getElementById("signedIn").innerHTML = "You are now signed in";
+	document.getElementById("signedIn").innerHTML = "Signed in";
+      } else {
+	document.getElementById("signedIn").innerHTML = "Signed out";
       }
     }
 
@@ -99,14 +101,19 @@ var signedin = false;
 
     function handleSignOutClick(event) {
       gapi.auth2.getAuthInstance().signOut();
-      	document.getElementById("signedIn").innerHTML = "";
+	    document.getElementById("signedIn").innerHTML = "Signed out";
     }
     function addData(event) {
+	if (document.getElementById("signedIn").innerHTML == "Signed out"){
+		alert("Not signed in")
+	} else {
+		
 	var clubHTML = document.getElementById("clubPicked");
 	var club = clubHTML.value;
 	var qr = document.getElementById("myText").innerHTML;
 	makeApiCall(qr, club);
 	document.getElementById("myText").innerHTML = "";
+	}
 }
     </script>
 <style>
@@ -158,7 +165,7 @@ function sleep(milliseconds) {
 </script>
 <body>
 <h1>Code found: <span id="myText"></span> </h1>
-<h2>If signed in, message will appear here --> <span id="signedIn"></span><h2>
+<h2><span id="signedIn"></span><h2>
 </body>
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
