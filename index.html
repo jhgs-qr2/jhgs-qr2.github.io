@@ -106,6 +106,8 @@ var signedin = false;
     function addData(event) {
 	if (document.getElementById("signedIn").innerHTML == "Signed out"){
 		alert("Not signed in")
+	} else if (document.getElementById("myText").innerHTML == "") {
+		alert("No name found")
 	} else {
 		
 	var clubHTML = document.getElementById("clubPicked");
