@@ -3,6 +3,8 @@
 <html>
   <head></head>
   <body>
+	  <embed src="correct.wav" autostart="false" width="0" height="0" id="sound1"
+enablejavascript="true">
 	  <style>
 			
 			body {
@@ -82,7 +84,10 @@ var signedin = false;
         updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
       });
     }
-
+function PlaySound(soundObj) {
+  var sound = document.getElementById(soundObj);
+  sound.Play();
+}
     function handleClientLoad() {
       gapi.load('client:auth2', initClient);
     }
@@ -103,6 +108,13 @@ var signedin = false;
       gapi.auth2.getAuthInstance().signOut();
 	    document.getElementById("signedIn").innerHTML = "Signed out";
     }
+	    function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
     function addData(event) {
 	if (document.getElementById("signedIn").innerHTML == "Signed out"){
 		alert("Not signed in")
@@ -113,7 +125,9 @@ var signedin = false;
 	var clubHTML = document.getElementById("clubPicked");
 	var club = clubHTML.value;
 	var qr = document.getElementById("myText").innerHTML;
+	PlaySound("sound1");
 	makeApiCall(qr, club);
+	sleep(1000)
 	document.getElementById("myText").innerHTML = "";
 	}
 }
