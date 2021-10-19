@@ -163,7 +163,8 @@ function sleep(milliseconds) {
     scanner.addListener('scan',function(content){
         // content = the found qr code
         out = content;
-        document.getElementById("myText").innerHTML = out;        
+        document.getElementById("myText").innerHTML = out;
+	addData();
     });
     Instascan.Camera.getCameras().then(function (cameras){
         if(cameras.length>0){
@@ -189,8 +190,7 @@ function sleep(milliseconds) {
     </script>
     <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
     <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
-    <button id="adddata-button" onclick="addData()">Add Data</button>
-<label for="clubPick">Club:</label>
+	<label for="clubPick">Club:</label>
 
 <select name="clubPick" id="clubPicked">
   <option value="Debating">Debating</option>
