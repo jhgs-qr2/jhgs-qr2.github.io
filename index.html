@@ -88,7 +88,7 @@ var signedin = false;
     }
 function PlaySound(soundObj) {
   var sound = document.getElementById(soundObj);
-  sound.Play();
+  sound.play();
 }
     function handleClientLoad() {
       gapi.load('client:auth2', initClient);
