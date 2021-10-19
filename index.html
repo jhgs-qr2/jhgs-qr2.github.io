@@ -3,9 +3,8 @@
 <html>
   <head></head>
   <body>
-	  <audio id="sound1" preload=auto>
-	  <embed src="correct.wav" autostart="false" width="0" height="0" type="audio/wav">
-	  </audio>
+	  	  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
+
 	  <style>
 			
 			body {
@@ -27,6 +26,7 @@
 			    cursor:pointer;
 			}
 		</style>
+	 
     <script>
 	
 
@@ -85,10 +85,7 @@ var signedin = false;
         updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
       });
     }
-function PlaySound(soundObj) {
-  var sound = document.getElementById(soundObj);
-  sound.play();
-}
+
     function handleClientLoad() {
       gapi.load('client:auth2', initClient);
     }
@@ -126,9 +123,11 @@ function PlaySound(soundObj) {
 	var clubHTML = document.getElementById("clubPicked");
 	var club = clubHTML.value;
 	var qr = document.getElementById("myText").innerHTML;
-	PlaySound("sound1");
 	makeApiCall(qr, club);
-	sleep(1000)
+	var sound = new Howl({
+		urls: ["correct.wav"]
+	}).play();
+	sleep(1000);
 	document.getElementById("myText").innerHTML = "";
 	}
 }
@@ -150,7 +149,7 @@ function PlaySound(soundObj) {
 </style>
 <video id="preview"></video>
 <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-<script type="text/javascript">
+	  <script type="text/javascript">
 function sleep(milliseconds) {
   const date = Date.now();
   let currentDate = null;
