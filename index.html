@@ -125,7 +125,7 @@ var signedin = false;
 	var qr = document.getElementById("myText").innerHTML;
 	makeApiCall(qr, club);
 	var sound = new Howl({
-		urls: ["correct.wav"]
+		src: ["correct.wav"]
 	}).play();
 	sleep(1000);
 	document.getElementById("myText").innerHTML = "";
