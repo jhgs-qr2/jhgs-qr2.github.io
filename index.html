@@ -106,13 +106,6 @@
 	      gapi.auth2.getAuthInstance().signOut();
 		    document.getElementById("signedIn").innerHTML = "Signed out";
 	    }
-	function sleep(milliseconds) {
-	  const date = Date.now();
-	  let currentDate = null;
-	  do {
-	    currentDate = Date.now();
-	  } while (currentDate - date < milliseconds);
-	}
 	    function addData(event) {
 		if (document.getElementById("signedIn").innerHTML == "Signed out"){
 			alert("Not signed in")
@@ -127,10 +120,6 @@
 		var sound = new Howl({
 			src: ["correct.wav"]
 		}).play();
-		setTimeout(function(param_1) {
-	if (document.getElementById("myText").innerHTML == param_1){
-		document.getElementById("myText").innerHTML = "";
-	}}, 1000, qr);
 		}
 	}
 	    </script>
