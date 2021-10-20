@@ -127,11 +127,10 @@
 		var sound = new Howl({
 			src: ["correct.wav"]
 		}).play();
-		setTimeout(() => { if document.getElementById("myText").innerHTML = ""; }, 2000);
 		setTimeout(function(param_1) {
 	if (document.getElementById("myText").innerHTML == param_1){
 		document.getElementById("myText").innerHTML = "";
-	}}, 2000, qr);
+	}}, 1000, qr);
 		}
 	}
 	    </script>
