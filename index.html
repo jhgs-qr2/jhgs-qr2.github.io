@@ -127,8 +127,11 @@
 		var sound = new Howl({
 			src: ["correct.wav"]
 		}).play();
-		setTimeout(() => { document.getElementById("myText").innerHTML = ""; }, 2000);
-		
+		setTimeout(() => { if document.getElementById("myText").innerHTML = ""; }, 2000);
+		setTimeout(function(param_1) {
+	if (document.getElementById("myText").innerHTML == param_1){
+		document.getElementById("myText").innerHTML = "";
+	}}, 2000, qr);
 		}
 	}
 	    </script>
@@ -182,7 +185,7 @@
 	</script>
 	<body>
 	<h1>Name found: <span id="myText"></span> </h1>
-	<h2><span id="signedIn"></span><h2>
+	<h3><span id="signedIn"></span><h3>
 	</body>
 	    <script async defer src="https://apis.google.com/js/api.js"
 	      onload="this.onload=function(){};handleClientLoad()"
