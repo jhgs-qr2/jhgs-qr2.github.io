@@ -1,202 +1,202 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 
-<html>
-  <head></head>
-  <body>
-	  	  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
+	<html>
+	  <head></head>
+	  <body>
+			  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
 
-	  <style>
-			
-			body {
-			    padding:20px;
-			}
-			input {
-			    padding:5px;
-			    background-color:transparent;
-			    border:none;
-			    border-bottom:solid 4px #FFD700;
-			    width:250px;
-			    font-size:16px;
-			}
-			
-			button {
-			    background-color:#FFD700;
-			    padding:8px;
-			    color:black;
-			    cursor:pointer;
-			}
-		</style>
-	 
-    <script>
-	
+		  <style>
 
-    function makeApiCall(qr, club) {
-      var params = {
-        // The ID of the spreadsheet to update.
-        spreadsheetId: '1SK2oTjri2krTIZ6XglLbBrv4PqZM-OiGf3f_WovTEZ4',
+				body {
+				    padding:20px;
+				}
+				input {
+				    padding:5px;
+				    background-color:transparent;
+				    border:none;
+				    border-bottom:solid 4px #FFD700;
+				    width:250px;
+				    font-size:16px;
+				}
 
-        // The A1 notation of a range to search for a logical table of data.
-        // Values will be appended after the last row of the table.
-        range: club.concat('!A1:B1'),
+				button {
+				    background-color:#FFD700;
+				    padding:8px;
+				    color:black;
+				    cursor:pointer;
+				}
+			</style>
 
-        // How the input data should be interpreted.
-        valueInputOption: 'USER_ENTERED',
+	    <script>
 
-        // How the input data should be inserted.
-        insertDataOption: 'INSERT_ROWS', 
-      };
- var d = new Date();
-var n = d.toLocaleString();
-var signedin = false; 
-      var valueRangeBody = {
 
-  "range": club+"!A1:B1",
-  "majorDimension": "ROWS",
-  "values": [
-    [qr,n]
-]
-      };
+	    function makeApiCall(qr, club) {
+	      var params = {
+		// The ID of the spreadsheet to update.
+		spreadsheetId: '1SK2oTjri2krTIZ6XglLbBrv4PqZM-OiGf3f_WovTEZ4',
 
-      var request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
-      request.then(function(response) {
-      }, function(reason) {
-        alert('error: ' + reason.result.error.message);
-      });
-    }
+		// The A1 notation of a range to search for a logical table of data.
+		// Values will be appended after the last row of the table.
+		range: club.concat('!A1:B1'),
 
-    function initClient() {
-      var API_KEY = 'AIzaSyAm02zc16ma4fmsHi-a34Kcze0C9rc19wk'; 
+		// How the input data should be interpreted.
+		valueInputOption: 'USER_ENTERED',
 
-      var CLIENT_ID = '36530272431-up5uj8q5psvs60fafqaah8cbhdoj99dm.apps.googleusercontent.com'; 
+		// How the input data should be inserted.
+		insertDataOption: 'INSERT_ROWS', 
+	      };
+	 var d = new Date();
+	var n = d.toLocaleString();
+	var signedin = false; 
+	      var valueRangeBody = {
 
-      // TODO: Authorize using one of the following scopes:
-      //   'https://www.googleapis.com/auth/drive'
-      //   'https://www.googleapis.com/auth/drive.file'
-      //   'https://www.googleapis.com/auth/spreadsheets'
-      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
+	  "range": club+"!A1:B1",
+	  "majorDimension": "ROWS",
+	  "values": [
+	    [qr,n]
+	]
+	      };
 
-      gapi.client.init({
-        'apiKey': API_KEY,
-        'clientId': CLIENT_ID,
-        'scope': SCOPE,
-        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-      }).then(function() {
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
-        updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-      });
-    }
+	      var request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
+	      request.then(function(response) {
+	      }, function(reason) {
+		alert('error: ' + reason.result.error.message);
+	      });
+	    }
 
-    function handleClientLoad() {
-      gapi.load('client:auth2', initClient);
-    }
+	    function initClient() {
+	      var API_KEY = 'AIzaSyAm02zc16ma4fmsHi-a34Kcze0C9rc19wk'; 
 
-    function updateSignInStatus(isSignedIn) {
-      if (isSignedIn) {
-	document.getElementById("signedIn").innerHTML = "Signed in";
-      } else {
-	document.getElementById("signedIn").innerHTML = "Signed out";
-      }
-    }
+	      var CLIENT_ID = '36530272431-up5uj8q5psvs60fafqaah8cbhdoj99dm.apps.googleusercontent.com'; 
 
-    function handleSignInClick(event) {
-      gapi.auth2.getAuthInstance().signIn();
-    }
+	      // TODO: Authorize using one of the following scopes:
+	      //   'https://www.googleapis.com/auth/drive'
+	      //   'https://www.googleapis.com/auth/drive.file'
+	      //   'https://www.googleapis.com/auth/spreadsheets'
+	      var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 
-    function handleSignOutClick(event) {
-      gapi.auth2.getAuthInstance().signOut();
-	    document.getElementById("signedIn").innerHTML = "Signed out";
-    }
-	    function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
-    function addData(event) {
-	if (document.getElementById("signedIn").innerHTML == "Signed out"){
-		alert("Not signed in")
-	} else if (document.getElementById("myText").innerHTML == "") {
-		alert("No name found")
-	} else {
-		
-	var clubHTML = document.getElementById("clubPicked");
-	var club = clubHTML.value;
-	var qr = document.getElementById("myText").innerHTML;
-	makeApiCall(qr, club);
-	var sound = new Howl({
-		src: ["correct.wav"]
-	}).play();
-	sleep(1000);
-	document.getElementById("myText").innerHTML = "";
+	      gapi.client.init({
+		'apiKey': API_KEY,
+		'clientId': CLIENT_ID,
+		'scope': SCOPE,
+		'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+	      }).then(function() {
+		gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+		updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+	      });
+	    }
+
+	    function handleClientLoad() {
+	      gapi.load('client:auth2', initClient);
+	    }
+
+	    function updateSignInStatus(isSignedIn) {
+	      if (isSignedIn) {
+		document.getElementById("signedIn").innerHTML = "Signed in";
+	      } else {
+		document.getElementById("signedIn").innerHTML = "Signed out";
+	      }
+	    }
+
+	    function handleSignInClick(event) {
+	      gapi.auth2.getAuthInstance().signIn();
+	    }
+
+	    function handleSignOutClick(event) {
+	      gapi.auth2.getAuthInstance().signOut();
+		    document.getElementById("signedIn").innerHTML = "Signed out";
+	    }
+	function sleep(milliseconds) {
+	  const date = Date.now();
+	  let currentDate = null;
+	  do {
+	    currentDate = Date.now();
+	  } while (currentDate - date < milliseconds);
 	}
-}
-    </script>
-<style>
-#preview{
-   width:500px;
-   height: 500px;
-   margin:0px auto;
-}
-</style>
-<video id="preview"></video>
-<style>
-#preview{
-   width:500px;
-   height: 500px;
-   margin:0px auto;
-}
-</style>
-<video id="preview"></video>
-<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-	  <script type="text/javascript">
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
+	    function addData(event) {
+		if (document.getElementById("signedIn").innerHTML == "Signed out"){
+			alert("Not signed in")
+		} else if (document.getElementById("myText").innerHTML == "") {
+			alert("No name found")
+		} else {
 
- var out = "";
-    var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
-    scanner.addListener('scan',function(content){
-        // content = the found qr code
-        out = content;
-        document.getElementById("myText").innerHTML = out;
-	addData();
-    });
-    Instascan.Camera.getCameras().then(function (cameras){
-        if(cameras.length>0){
-            scanner.start(cameras[0]);
-                    if(cameras[0]!=""){
-                        scanner.start(cameras[0]);
-                    }else{
-                        alert('No Front camera found!');
-            };
-        }else{
-            console.error('No cameras found.');
-            alert('No cameras found.');
-        }
-    });
-</script>
-<body>
-<h1>Code found: <span id="myText"></span> </h1>
-<h2><span id="signedIn"></span><h2>
-</body>
-    <script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
-      onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
-    <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
-    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
-	<label for="clubPick">Club:</label>
+		var clubHTML = document.getElementById("clubPicked");
+		var club = clubHTML.value;
+		var qr = document.getElementById("myText").innerHTML;
+		makeApiCall(qr, club);
+		var sound = new Howl({
+			src: ["correct.wav"]
+		}).play();
+		setTimeout(() => { document.getElementById("myText").innerHTML = ""; }, 2000);
+		
+		}
+	}
+	    </script>
+	<style>
+	#preview{
+	   width:500px;
+	   height: 500px;
+	   margin:0px auto;
+	}
+	</style>
+	<video id="preview"></video>
+	<style>
+	#preview{
+	   width:500px;
+	   height: 500px;
+	   margin:0px auto;
+	}
+	</style>
+	<video id="preview"></video>
+	<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+		  <script type="text/javascript">
+	function sleep(milliseconds) {
+	  const date = Date.now();
+	  let currentDate = null;
+	  do {
+	    currentDate = Date.now();
+	  } while (currentDate - date < milliseconds);
+	}
 
-<select name="clubPick" id="clubPicked">
-  <option value="Debating">Debating</option>
-  <option value="Mock Trial">Mock Trial</option>
-</select>
+	 var out = "";
+	    var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
+	    scanner.addListener('scan',function(content){
+		// content = the found qr code
+		out = content;
+		document.getElementById("myText").innerHTML = out;
+		addData();
+	    });
+	    Instascan.Camera.getCameras().then(function (cameras){
+		if(cameras.length>0){
+		    scanner.start(cameras[0]);
+			    if(cameras[0]!=""){
+				scanner.start(cameras[0]);
+			    }else{
+				alert('No Front camera found!');
+		    };
+		}else{
+		    console.error('No cameras found.');
+		    alert('No cameras found.');
+		}
+	    });
+	</script>
+	<body>
+	<h1>Name found: <span id="myText"></span> </h1>
+	<h2><span id="signedIn"></span><h2>
+	</body>
+	    <script async defer src="https://apis.google.com/js/api.js"
+	      onload="this.onload=function(){};handleClientLoad()"
+	      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+	    </script>
+	    <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
+	    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+		<label for="clubPick">Club:</label>
 
-  </body>
-</html>
+	<select name="clubPick" id="clubPicked">
+	  <option value="Debating">Debating</option>
+	  <option value="Mock Trial">Mock Trial</option>
+	</select>
+
+	  </body>
+	</html>
 
