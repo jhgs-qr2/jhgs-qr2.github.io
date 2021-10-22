@@ -95,6 +95,7 @@
 		document.getElementById("signedIn").innerHTML = "Signed in";
 	      } else {
 		document.getElementById("signedIn").innerHTML = "Signed out";
+		handleSignInClick();
 	      }
 	    }
 
@@ -108,7 +109,7 @@
 	    }
 	    function addData(event) {
 		if (document.getElementById("signedIn").innerHTML == "Signed out"){
-			alert("Not signed in")
+			handleSignInClick()
 		} else if (document.getElementById("myText").innerHTML == "") {
 			alert("No name found")
 		} else {
