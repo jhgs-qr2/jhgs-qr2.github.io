@@ -95,7 +95,9 @@
 		document.getElementById("signedIn").innerHTML = "Signed in";
 	      } else {
 		document.getElementById("signedIn").innerHTML = "Signed out";
-		handleSignInClick();
+		if (window.confirm("Do you want to sign in?")) {
+  handleSignInClick()
+}
 	      }
 	    }
 
