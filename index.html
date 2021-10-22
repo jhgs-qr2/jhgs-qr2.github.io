@@ -29,8 +29,8 @@
 </style>
 
 <script>
-    let namearray = [["Name","Time"]]
-
+    let namearray = [["Name","Time"]];
+let signedin = true;
 
     function makeApiCall(qr, club) {
         var params = {
@@ -90,9 +90,16 @@
 
     function updateSignInStatus(isSignedIn) {
         if (isSignedIn) {
-            document.getElementById("signedIn").innerHTML = "Signed in";
+            document.getElementById("signin-button").style.visibility = "hidden";
+            document.getElementById("signin-button").innerHTML = "";
+            document.getElementById("clubLabel").style.visibility = "visible";
+            document.getElementById("clubPicked").style.visibility = "visible";
+            signedin = true;
         } else {
             document.getElementById("signedIn").innerHTML = "Signed out";
+            document.getElementById("clubLabel").style.visibility = "hidden";
+            document.getElementById("clubPicked").style.visibility = "hidden";
+            signedin = false;
         }
     }
 
@@ -106,11 +113,13 @@
     }
 
     function addData(event) {
-        if (document.getElementById("signedIn").innerHTML == "Signed out") {
+        if (signedin == false) {
             alert("Not signed in")
         } else if (document.getElementById("myText").innerHTML == "") {
             alert("No name found")
-        } else {
+        } else if (document.getElementById("clubPicked").value == "none") {
+            alert("No club selected")
+        }else{
 
             var clubHTML = document.getElementById("clubPicked");
             var club = clubHTML.value;
@@ -124,18 +133,12 @@ namearray.push([qr,new Date().toLocaleTimeString()])
         }
     }
 </script>
-<style>
-    #preview {
-        width: 500px;
-        height: 500px;
-        margin: 0 auto;
-    }
-</style>
+
 <video id="preview"></video>
 <style>
     #preview {
         width: 500px;
-        height: 500px;
+        height: 350px;
         margin: 0 auto;
     }
 </style>
@@ -173,18 +176,18 @@ namearray.push([qr,new Date().toLocaleTimeString()])
     });
 </script>
 <body>
-<h1>Last name found: <span id="myText"></span></h1>
-<h2><span id="signedIn"></span></h2>
+<span id="myText" hidden></span>
+<h2><span id="signedIn" hidden></span></h2>
 </body>
 <script async defer onload="this.onload=function(){};handleClientLoad()"
         onreadystatechange="if (this.readyState === 'complete') this.onload()"
         src="https://apis.google.com/js/api.js">
 </script>
 <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
-<button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
-<label>Club:</label>
+<label id="clubLabel">Club:</label>
 
 <select id="clubPicked" name="clubPick">
+    <option disabled selected value="none"> -- select a club -- </option>
     <option value="Debating">Debating</option>
     <option value="Mock Trial">Mock Trial</option>
 </select>
@@ -215,8 +218,8 @@ namearray.push([qr,new Date().toLocaleTimeString()])
 <style>
     table {
         position: absolute;
-        left: 750px;
-        top: 150px;
+        left: 600px;
+        top: 45px;
         font-size: 30px;
         font-family: Arial, Helvetica, sans-serif;
         display: block;
@@ -225,6 +228,16 @@ namearray.push([qr,new Date().toLocaleTimeString()])
     th, td {
         border: 1px solid black;
         padding: 10px;
+    }
+    h1, h2, h3, h4, h5, p, label{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    button{
+        font-size: 50px;
+    }
+    select, label{
+        font-size: 20px;
+
     }
 </style>
 </body>
