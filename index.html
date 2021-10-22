@@ -29,6 +29,7 @@
 </style>
 
 <script>
+    let namearray = [["Name","Time"]]
 
 
     function makeApiCall(qr, club) {
@@ -118,6 +119,8 @@
             var sound = new Howl({
                 src: ["correct.wav"]
             }).play();
+namearray.push([qr,new Date().toLocaleTimeString()])
+            updateTable(namearray)
         }
     }
 </script>
@@ -187,23 +190,43 @@
 </select>
 <div id="table"></div>
 <script>
-    function makeTableHTML(myArray) {
-        var result = "<table border=1>";
-        for (var i = 0; i < myArray.length; i++) {
-            result += "<tr>";
-            for (var j = 0; j < myArray[i].length; j++) {
-                result += "<td>" + myArray[i][j] + "</td>";
+    function updateTable(namearray) {
+        document.getElementById("table").innerHTML = "";
+        function makeTableHTML(myArray) {
+            var result = "<table>";
+            for (var i = 0; i < myArray.length; i++) {
+                result += "<tr>";
+                for (var j = 0; j < myArray[i].length; j++) {
+                    result += "<td>" + myArray[i][j] + "</td>";
+                }
+                result += "</tr>";
             }
-            result += "</tr>";
+            result += "</table>";
+
+            return result;
         }
-        result += "</table>";
 
-        return result;
+        tablediv = document.getElementById("table")
+        var tablecontents = makeTableHTML(namearray);
+        tablediv.insertAdjacentHTML('afterbegin', tablecontents);
     }
-
-    tablediv = document.getElementById("table")
-    alert(tablediv)
-    var tablecontents = makeTableHTML([["row 1, cell 1", "row 1, cell 2"], ["row 2, cell 1", "row 2, cell 2"]]);
-    tablediv.insertAdjacentHTML('beforebegin', tablecontents);</script>
+    updateTable(namearray)
+</script>
+<style>
+    table {
+        position: absolute;
+        left: 750px;
+        top: 150px;
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+        display: block;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 10
+        px;
+    }
+</style>
 </body>
 </html>
