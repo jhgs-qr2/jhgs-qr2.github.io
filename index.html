@@ -4,7 +4,6 @@
 	  <head></head>
 	  <body>
 			  <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 		  <style>
 
@@ -29,24 +28,8 @@
 			</style>
 
 	    <script>
-		    function signinbox();
-  $( function() {
-    $( "#dialog-confirm" ).dialog({
-      resizable: false,
-      height: "auto",
-      width: 400,
-      modal: true,
-      buttons: {
-        "Sign In": function() {
-		  handleSignInClick()
-          $( this ).dialog( "close" );
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  } );
+
+
 	    function makeApiCall(qr, club) {
 	      var params = {
 		// The ID of the spreadsheet to update.
@@ -112,7 +95,6 @@
 		document.getElementById("signedIn").innerHTML = "Signed in";
 	      } else {
 		document.getElementById("signedIn").innerHTML = "Signed out";
-		signinbox()
 	      }
 	    }
 
@@ -126,9 +108,9 @@
 	    }
 	    function addData(event) {
 		if (document.getElementById("signedIn").innerHTML == "Signed out"){
-			handleSignInClick()
+			alert("Not signed in")
 		} else if (document.getElementById("myText").innerHTML == "") {
-					signinbox()
+			alert("No name found")
 		} else {
 
 		var clubHTML = document.getElementById("clubPicked");
@@ -205,9 +187,6 @@
 	  <option value="Debating">Debating</option>
 	  <option value="Mock Trial">Mock Trial</option>
 	</select>
-<div id="dialog-confirm" title="Sign In?">
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Do you want to sign in?</p>
-</div>
+
 	  </body>
 	</html>
-
