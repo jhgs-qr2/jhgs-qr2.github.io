@@ -183,13 +183,12 @@ namearray.push([qr,new Date().toLocaleTimeString()])
         onreadystatechange="if (this.readyState === 'complete') this.onload()"
         src="https://apis.google.com/js/api.js">
 </script>
+
 <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
 <label id="clubLabel">Club:</label>
 
 <select id="clubPicked" name="clubPick">
     <option disabled selected value="none"> -- select a club -- </option>
-    <option value="Debating">Debating</option>
-    <option value="Mock Trial">Mock Trial</option>
 </select>
 <div id="table"></div>
 <script>
@@ -213,7 +212,31 @@ namearray.push([qr,new Date().toLocaleTimeString()])
         var tablecontents = makeTableHTML(namearray);
         tablediv.insertAdjacentHTML('afterbegin', tablecontents);
     }
-    updateTable(namearray)
+    updateTable(namearray);
+</script>
+<script>
+
+    function clubspickermaker(data) {
+        var sel = document.getElementById("clubPicked");
+        for(var i = 0; i < clubs.length; i++) {
+            var opt = document.createElement('option');
+            opt.innerHTML = clubs[i];
+            opt.value = clubs[i];
+            sel.appendChild(opt);
+        }
+    };
+
+    var clubs = "";
+    fetch('https://rentry.co/v2s92/raw')
+        .then(response => response.text())
+        .then((data) => {
+            clubs = data;
+            clubs = data.split("\n")
+        })
+        .then((data) => {
+            clubspickermaker(data)
+        })
+
 </script>
 <style>
     table {
