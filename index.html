@@ -99,6 +99,8 @@ let signedin = true;
             document.getElementById("signedIn").innerHTML = "Signed out";
             document.getElementById("clubLabel").style.visibility = "hidden";
             document.getElementById("clubPicked").style.visibility = "hidden";
+            document.getElementById("signout-button").style.visibility = "hidden";
+            document.getElementById("signout-button").innerHTML = "";
             signedin = false;
         }
     }
@@ -109,7 +111,6 @@ let signedin = true;
 
     function handleSignOutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
-        document.getElementById("signedIn").innerHTML = "Signed out";
     }
 
     function addData(event) {
@@ -185,6 +186,8 @@ namearray.push([qr,new Date().toLocaleTimeString()])
 </script>
 
 <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
+    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+
 <label id="clubLabel">Club:</label>
 
 <select id="clubPicked" name="clubPick">
