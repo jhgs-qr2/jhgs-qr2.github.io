@@ -90,28 +90,28 @@ let signedin = true;
 
     function updateSignInStatus(isSignedIn) {
         if (isSignedIn) {
-            document.getElementById("signin-button").style.visibility = "hidden";
-            document.getElementById("clubLabel").style.visibility = "visible";
-            document.getElementById("clubPicked").style.visibility = "visible";
+            document.getElementById("signin-button").style.display = "none";
+            document.getElementById("clubLabel").style.display = "initial";
+            document.getElementById("clubPicked").style.display = "initial";
             signedin = true;
         } else {
             document.getElementById("signedIn").innerHTML = "Signed out";
-            document.getElementById("clubLabel").style.visibility = "hidden";
-            document.getElementById("clubPicked").style.visibility = "hidden";
-            document.getElementById("signout-button").style.visibility = "hidden";
+            document.getElementById("clubLabel").style.display = "none";
+            document.getElementById("clubPicked").style.display = "none";
+            document.getElementById("signout-button").style.display = "none";
             signedin = false;
         }
     }
 
     function handleSignInClick(event) {
         gapi.auth2.getAuthInstance().signIn();
-                            document.getElementById("signout-button").style.visibility = "visible";
+                            document.getElementById("signout-button").style.display = "initial";
 
     }
 
     function handleSignOutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
-                    document.getElementById("signin-button").style.visibility = "visible";
+                    document.getElementById("signin-button").style.display = "initial";
     }
 
     function addData(event) {
