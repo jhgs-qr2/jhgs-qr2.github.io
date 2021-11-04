@@ -91,7 +91,6 @@ let signedin = true;
     function updateSignInStatus(isSignedIn) {
         if (isSignedIn) {
             document.getElementById("signin-button").style.visibility = "hidden";
-            document.getElementById("signin-button").innerHTML = "";
             document.getElementById("clubLabel").style.visibility = "visible";
             document.getElementById("clubPicked").style.visibility = "visible";
             signedin = true;
@@ -100,19 +99,19 @@ let signedin = true;
             document.getElementById("clubLabel").style.visibility = "hidden";
             document.getElementById("clubPicked").style.visibility = "hidden";
             document.getElementById("signout-button").style.visibility = "hidden";
-            document.getElementById("signout-button").innerHTML = "";
             signedin = false;
         }
     }
 
     function handleSignInClick(event) {
         gapi.auth2.getAuthInstance().signIn();
+                            document.getElementById("signout-button").style.visibility = "visible";
+
     }
 
     function handleSignOutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
                     document.getElementById("signin-button").style.visibility = "visible";
-            document.getElementById("signin-button").innerHTML = "Signed In";
     }
 
     function addData(event) {
