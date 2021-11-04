@@ -111,6 +111,8 @@ let signedin = true;
 
     function handleSignOutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
+                    document.getElementById("signin-button").style.visibility = "visible";
+            document.getElementById("signin-button").innerHTML = "Signed In";
     }
 
     function addData(event) {
