@@ -114,6 +114,7 @@ function setCookie(cname, cvalue, exdays) {
     }
 
     function addData(event) {
+                  var qr = document.getElementById("myText").innerHTML;
         if (signedin == false) {
             alert("Not signed in")
         } else if (document.getElementById("myText").innerHTML == "") {
