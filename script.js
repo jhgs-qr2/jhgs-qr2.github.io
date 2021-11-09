@@ -117,7 +117,7 @@ function setCookie(cname, cvalue, exdays) {
       var duplicate = false;
                              var qr = document.getElementById("myText").innerHTML;
 
-      for datalist in namearray{
+for (const datalist of namearray){
 if (qr in datalist){
 duplicate = true;
 }
