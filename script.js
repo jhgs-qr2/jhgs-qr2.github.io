@@ -14,10 +14,10 @@ function getCookie(cname) {
   return "";
 }
 if (getCookie("names") == ""){
-    let namearray = [["Name","Time"]];
+    var namearray = [["Name","Time"]];
 
 } else {
-    let namearray = getCookie("names");
+    var namearray = getCookie("names");
 }
 
 let signedin = true;
