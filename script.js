@@ -114,6 +114,16 @@ function setCookie(cname, cvalue, exdays) {
     }
 
     function addData(event) {
+      var duplicate = false;
+                             var qr = document.getElementById("myText").innerHTML;
+
+      for datalist in namearray{
+if (qr in datalist){
+duplicate = true;
+}
+        
+      }
+      
                   var qr = document.getElementById("myText").innerHTML;
         if (signedin == false) {
             alert("Not signed in")
@@ -121,7 +131,7 @@ function setCookie(cname, cvalue, exdays) {
             alert("No name found")
         } else if (document.getElementById("clubPicked").value == "none") {
             alert("No club selected")
-        } else if (qr in namearray) {
+        } else if (duplicate) {
             alert("QR already scanned today")
         }
         else{
@@ -135,7 +145,7 @@ function setCookie(cname, cvalue, exdays) {
             }).play();
 namearray.push([qr,new Date().toLocaleTimeString()])
             updateTable(namearray)
-            setCookie("names", namearray, 1)
+            setCookie("names", namearray, 0.5)
         }
     }
     function sleep(milliseconds) {
