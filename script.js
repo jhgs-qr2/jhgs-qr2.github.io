@@ -201,8 +201,8 @@ namearray.push([qr,new Date().toLocaleTimeString()])
         .then(response => response.text())
         .then((data) => {
             clubs = data;
-            clubs = data.split("\n")
+            clubs = data.split("\n");
         })
         .then((data) => {
-            clubspickermaker(data)
+            clubspickermaker(clubs)
         })
