@@ -1,4 +1,25 @@
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+if (getCookie(names) == ""){
     let namearray = [["Name","Time"]];
+
+} else {
+    let namearray = getCookie(names);
+}
+
 let signedin = true;
 
     function makeApiCall(qr, club) {
@@ -62,6 +83,7 @@ let signedin = true;
             document.getElementById("signin-button").style.display = "none";
             document.getElementById("clubLabel").style.display = "initial";
             document.getElementById("clubPicked").style.display = "initial";
+            document.getElementById("cookiesconsent").style.display = "none";
             signedin = true;
         } else {
             document.getElementById("signedIn").innerHTML = "Signed out";
@@ -77,7 +99,12 @@ let signedin = true;
                             document.getElementById("signout-button").style.display = "initial";
 
     }
-
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
     function handleSignOutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
                     document.getElementById("signin-button").style.display = "initial";
@@ -90,7 +117,10 @@ let signedin = true;
             alert("No name found")
         } else if (document.getElementById("clubPicked").value == "none") {
             alert("No club selected")
-        }else{
+        } else if (qr in namearray) {
+            alert("QR already scanned today")
+        }
+        else{
 
             var clubHTML = document.getElementById("clubPicked");
             var club = clubHTML.value;
@@ -101,6 +131,7 @@ let signedin = true;
             }).play();
 namearray.push([qr,new Date().toLocaleTimeString()])
             updateTable(namearray)
+            setCookie("names", namearray, 1)
         }
     }
     function sleep(milliseconds) {
