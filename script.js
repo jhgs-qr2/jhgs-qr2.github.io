@@ -1,3 +1,4 @@
+var namearray = ""
 function getCookie(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -15,10 +16,10 @@ function getCookie(cname) {
 }
 function loadarray() {
 if (getCookie("names") == ""){
-    var namearray = [["Name","Time"]];
+     namearray = [["Name","Time"]];
 
 } else {
-    var namearray = getCookie("names");
+    namearray = getCookie("names");
 }
 }
 window.onload = loadarray;
