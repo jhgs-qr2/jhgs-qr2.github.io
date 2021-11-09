@@ -120,7 +120,7 @@ function setCookie(cname, cvalue, exdays) {
 namearray.forEach(function (datalist, index) {
 if (qr in datalist){
 duplicate = true;
-}
+});
         
       }
       
