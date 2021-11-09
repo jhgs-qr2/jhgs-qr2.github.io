@@ -13,13 +13,15 @@ function getCookie(cname) {
   }
   return "";
 }
+function loadarray() {
 if (getCookie("names") == ""){
     var namearray = [["Name","Time"]];
 
 } else {
     var namearray = getCookie("names");
 }
-
+}
+window.onload = loadarray;
 let signedin = true;
 
     function makeApiCall(qr, club) {
