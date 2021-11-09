@@ -206,3 +206,4 @@ namearray.push([qr,new Date().toLocaleTimeString()])
         .then((data) => {
             clubspickermaker(clubs)
         })
+// bottom text
