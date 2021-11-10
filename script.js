@@ -149,7 +149,7 @@ namearray.push([qr,new Date().toLocaleTimeString()])
             updateTable(namearray)
             setCookie("names", namearray, 0.5)
         }
-    }
+ 
     function sleep(milliseconds) {
         const date = Date.now();
         let currentDate = null;
