@@ -36,6 +36,7 @@ function loadarray() {
 
     } else {
         namearray = getCookie("names");
+        namearray = JSON.parse(namearray);
     }
 }
 
@@ -160,7 +161,7 @@ function addData(event) {
         }).play();
         namearray.push([qr, new Date().toLocaleTimeString()])
         updateTable(namearray)
-        setCookie("names", namearray, 0.5)
+        setCookie("names", JSON.stringify(namearray), 0.5)
     }
 
 }
