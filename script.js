@@ -1,4 +1,5 @@
-var namearray = ""
+var namearray = "";
+var foundname = "";
 function getCookie(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -115,7 +116,7 @@ function setCookie(cname, cvalue, exdays) {
 
     function addData(event) {
       var duplicate = false;
-                             var qr = document.getElementById("myText").innerHTML;
+                             var qr = foundname;
 
 namearray.forEach(function (datalist, index) {
 if (qr in datalist){
@@ -126,10 +127,10 @@ duplicate = true;
         
       }
       
-                  var qr = document.getElementById("myText").innerHTML;
+                             var qr = foundname;
         if (signedin == false) {
             alert("Not signed in")
-        } else if (document.getElementById("myText").innerHTML == "") {
+        } else if (qr == "") {
             alert("No name found")
         } else if (document.getElementById("clubPicked").value == "none") {
             alert("No club selected")
@@ -140,8 +141,7 @@ duplicate = true;
 
             var clubHTML = document.getElementById("clubPicked");
             var club = clubHTML.value;
-            var qr = document.getElementById("myText").innerHTML;
-            makeApiCall(qr, club);
+          makeApiCall(qr, club);
             var sound = new Howl({
                 src: ["correct.wav"]
             }).play();
@@ -163,8 +163,8 @@ namearray.push([qr,new Date().toLocaleTimeString()])
     scanner.addListener('scan', function (content) {
         // content = the found qr code
         out = content;
-        document.getElementById("myText").innerHTML = out;
-        addData();
+foundname = out;
+      addData();
     });
     Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
