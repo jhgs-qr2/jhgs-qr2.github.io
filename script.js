@@ -157,7 +157,7 @@ namearray.push([qr,new Date().toLocaleTimeString()])
             currentDate = Date.now();
         } while (currentDate - date < milliseconds);
     }
-
+    }
     var out = "";
     var scanner = new Instascan.Scanner({video: document.getElementById('preview'), scanPeriod: 5, mirror: false});
     scanner.addListener('scan', function (content) {
