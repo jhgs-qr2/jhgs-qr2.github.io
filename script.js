@@ -118,8 +118,8 @@ function setCookie(cname, cvalue, exdays) {
       var duplicate = false;
                              var qr = foundname;
 
-namearray.forEach(function (datalist, index) {
-if (qr in datalist){
+namearray.forEach(function (namedate, index) {
+if (qr in namedate){
 duplicate = true;
 }
 }
