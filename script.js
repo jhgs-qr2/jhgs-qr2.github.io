@@ -2,16 +2,6 @@ var namearray = "";
 var foundname = "";
 let signedin = true;
 
-function clubspickermaker(data) {
-    var sel = document.getElementById("clubPicked");
-    for (var i = 0; i < clubs.length; i++) {
-        var opt = document.createElement('option');
-        opt.innerHTML = clubs[i];
-        opt.value = clubs[i];
-        sel.appendChild(opt);
-    }
-};
-
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -228,9 +218,9 @@ function clubspickermaker(data) {
 };
 
 
-updateTable(namearray);
 qrscanner();
-loadarray()
+loadarray();
+updateTable(namearray);
 var clubs = "";
 fetch('https://will-harmer.github.io/clubs.txt')
     .then(response => response.text())
