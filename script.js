@@ -2,6 +2,12 @@ var namearray = "";
 var foundname = "";
 let signedin = true;
 
+function useRegex(input) {
+    let regex = /^\d\d\d\d\d[a-zA-Z][a-zA-Z]$/;
+    return regex.test(input);
+}
+console.log(useRegex("12103WH"));
+
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
