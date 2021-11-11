@@ -6,7 +6,6 @@ function useRegex(input) {
     let regex = /^\d\d\d\d\d[a-zA-Z][a-zA-Z]$/;
     return regex.test(input);
 }
-console.log(useRegex("12103WH"));
 
 function getCookie(cname) {
     let name = cname + "=";
@@ -147,7 +146,10 @@ function addData(event) {
         alert("No club selected")
     } else if (duplicate) {
         alert("QR already scanned today")
-    } else {
+    } else if (useRegex(qr)) {
+        alert("Invalid QR")
+    }
+    {
 
         var clubHTML = document.getElementById("clubPicked");
         var club = clubHTML.value;
