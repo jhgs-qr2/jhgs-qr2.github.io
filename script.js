@@ -148,8 +148,7 @@ function addData(event) {
         alert("QR already scanned today")
     } else if (useRegex(qr)) {
         alert("Invalid QR")
-    }
-    {
+    } else {
 
         var clubHTML = document.getElementById("clubPicked");
         var club = clubHTML.value;
