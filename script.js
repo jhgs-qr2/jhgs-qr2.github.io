@@ -146,7 +146,7 @@ function addData(event) {
         alert("No club selected")
     } else if (duplicate) {
         alert("QR already scanned today")
-    } else if (useRegex(qr)) {
+    } else if (useRegex(qr) == false) {
         alert("Invalid QR")
     } else {
 
