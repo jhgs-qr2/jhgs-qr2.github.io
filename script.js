@@ -1,12 +1,15 @@
+// Global variables
 var namearray = "";
 var foundname = "";
 let signedin = true;
 
+// Format check on qr input
 function useRegex(input) {
     let regex = /^\d\d\d\d\d[a-zA-Z][a-zA-Z]$/;
     return regex.test(input);
 }
 
+// Read cookie from cookie name - returns cookie data
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
@@ -23,6 +26,7 @@ function getCookie(cname) {
     return "";
 }
 
+// Loads array from cookie
 function loadarray() {
     if (getCookie("names") == "") {
         namearray = [
@@ -35,7 +39,7 @@ function loadarray() {
     }
 }
 
-
+// I have no idea it just works???????!!!111???!1
 function makeApiCall(qr, club) {
     var params = {
         // The ID of the spreadsheet to update.
@@ -69,6 +73,7 @@ function makeApiCall(qr, club) {
     });
 }
 
+// sign into google maybe?
 function initClient() {
     var API_KEY = 'AIzaSyAm02zc16ma4fmsHi-a34Kcze0C9rc19wk';
 
@@ -87,10 +92,12 @@ function initClient() {
     });
 }
 
+//?
 function handleClientLoad() {
     gapi.load('client:auth2', initClient);
 }
 
+// are you signed in? thats a rhetorical question by the way
 function updateSignInStatus(isSignedIn) {
     if (isSignedIn) {
         document.getElementById("signin-button").style.display = "none";
@@ -107,12 +114,15 @@ function updateSignInStatus(isSignedIn) {
     }
 }
 
+// signs you in probably
 function handleSignInClick(event) {
     gapi.auth2.getAuthInstance().signIn();
     document.getElementById("signout-button").style.display = "initial";
 
 }
 
+// makes cookie mmmmmmmmmm
+// also google gonna break cookies in 2023 good luck fixing this LLLLL
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -120,11 +130,14 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
+// signs u out
 function handleSignOutClick(event) {
     gapi.auth2.getAuthInstance().signOut();
     document.getElementById("signin-button").style.display = "initial";
 }
 
+// function that adds data to spreadsheet 
+// if u figure out what event is pls tell me
 function addData(event) {
     var duplicate = false;
     var qr = foundname;
@@ -163,6 +176,7 @@ function addData(event) {
 
 }
 
+// instascan example code but i put it in a function 
 function qrscanner() {
     var out = "";
     var scanner = new Instascan.Scanner({
@@ -192,6 +206,7 @@ function qrscanner() {
     });
 }
 
+// make table thing from list
 function updateTable(namearray) {
     document.getElementById("table").innerHTML = "";
 
@@ -214,6 +229,7 @@ function updateTable(namearray) {
     tablediv.insertAdjacentHTML('afterbegin', tablecontents);
 }
 
+// i forgor 💀
 function clubspickermaker(data) {
     var sel = document.getElementById("clubPicked");
     for (var i = 0; i < clubs.length; i++) {
@@ -224,7 +240,7 @@ function clubspickermaker(data) {
     }
 };
 
-
+// runs program probably
 qrscanner();
 loadarray();
 updateTable(namearray);
@@ -238,4 +254,59 @@ fetch('https://will-harmer.github.io/clubs.txt')
     .then((data) => {
         clubspickermaker(clubs)
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // bottom text
