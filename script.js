@@ -236,7 +236,9 @@ function clubspickermaker(data) {
         var opt = document.createElement('option');
         opt.innerHTML = clubs[i];
         opt.value = clubs[i];
+        if (clubs[i] != ""){
         sel.appendChild(opt);
+        }
     }
 };
 
@@ -248,7 +250,6 @@ var clubs = "";
 fetch('https://will-harmer.github.io/clubs.txt')
     .then(response => response.text())
     .then((data) => {
-        clubs = data;
         clubs = data.split("\n");
     })
     .then((data) => {
