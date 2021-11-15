@@ -60,7 +60,7 @@ function makeApiCall(qr, club) {
     var signedin = false;
     var valueRangeBody = {
 
-        "range": club + "!A1:B1",
+        "range": club + "!A2:B2",
         "majorDimension": "ROWS",
         "values": [
             [qr, n]
