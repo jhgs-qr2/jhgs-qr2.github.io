@@ -56,7 +56,7 @@ function makeApiCall(qr, club) {
         insertDataOption: 'INSERT_ROWS',
     };
     var d = new Date();
-    var n = d.toLocaleString();
+    var n = d.toLocaleString('en-GB', { timeZone: 'UTC' });
     var signedin = false;
     var valueRangeBody = {
 
