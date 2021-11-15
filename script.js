@@ -47,7 +47,7 @@ function makeApiCall(qr, club) {
 
         // The A1 notation of a range to search for a logical table of data.
         // Values will be appended after the last row of the table.
-        range: club.concat('!A:B'),
+        range: club.concat('!A3:B3'),
 
         // How the input data should be interpreted.
         valueInputOption: 'USER_ENTERED',
@@ -60,7 +60,7 @@ function makeApiCall(qr, club) {
     var signedin = false;
     var valueRangeBody = {
 
-        "range": club + "!A:B",
+        "range": club + "!A3:B3",
         "majorDimension": "ROWS",
         "values": [
             [qr, n]
