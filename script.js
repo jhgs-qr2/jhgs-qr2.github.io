@@ -247,7 +247,7 @@ qrscanner();
 loadarray();
 updateTable(namearray);
 var clubs = "";
-fetch('https://will-harmer.github.io/clubs.txt')
+fetch('/clubs.txt')
     .then(response => response.text())
     .then((data) => {
         clubs = data.split("\n");
