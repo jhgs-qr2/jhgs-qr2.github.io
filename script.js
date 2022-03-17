@@ -43,7 +43,7 @@ function loadarray() {
 function makeApiCall(qr, club) {
     var params = {
         // The ID of the spreadsheet to update.
-        spreadsheetId: '1SK2oTjri2krTIZ6XglLbBrv4PqZM-OiGf3f_WovTEZ4',
+        spreadsheetId: '1AuEYvc4csYDeKGCI-TzFCq3HsPNRw5cX9sDkrRYu1yw',
 
         // The A1 notation of a range to search for a logical table of data.
         // Values will be appended after the last row of the table.
